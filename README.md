@@ -1,6 +1,55 @@
-# Getting Started with Create React App
+# PIT_ReactApp (frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a full-stack e-commerce application for an online store that sells phones and laptops. The frontend is built with React, and it communicates with a Node.js/Express backend.
+
+## Features
+
+*   User authentication (login, registration)
+*   Product browsing, searching, and filtering
+*   Shopping cart functionality
+*   User profiles
+*   Admin dashboard for managing products, categories, and brands
+*   Contact form
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+*   [Node.js](https://nodejs.org/)
+*   [npm](https://www.npmjs.com/get-npm)
+*   [MongoDB](https://www.mongodb.com/try/download/community)
+
+### Installation
+
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/Saifullahkhan20/PIT_ReactApp.git
+    ```
+
+2.  **Navigate to the project directory:**
+    ```sh
+    cd PIT_ReactApp
+    ```
+
+3.  **Install NPM packages for both the server and the client:**
+    ```sh
+    npm install
+    ```
+    This will install dependencies for both the frontend and backend.
+
+4.  **Create a `.env` file in the root of the project.**
+    This file will hold your environment variables. You can use the `.env.example` as a template.
+
+    ```
+    PORT=5000
+    MONGO_URI=<YOUR_MONGODB_URI>
+    JWT_SECRET=<YOUR_JWT_SECRET>
+    JWT_EXPIRE=30d
+    ```
+
+    **Note:** You must replace `<YOUR_MONGODB_URI>` and `<YOUR_JWT_SECRET>` with your actual credentials.
 
 ## Available Scripts
 
@@ -8,63 +57,31 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the React app in development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm run server`
+
+Runs the backend Express server on `http://localhost:5000`.
+
+### `npm run dev`
+
+Runs both the client and server concurrently with `concurrently`. This is the recommended way to run the project for development.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Built With
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*   [React](https://reactjs.org/) - The web framework used
+*   [Node.js](https://nodejs.org/) - Backend runtime environment
+*   [Express](https://expressjs.com/) - Backend web framework
+*   [MongoDB](https://www.mongodb.com/) - NoSQL Database
+*   [Mongoose](https://mongoosejs.com/) - ODM for MongoDB
+*   [React Bootstrap](https://react-bootstrap.github.io/) - UI component library
+*   [Axios](https://axios-http.com/) - Promise-based HTTP client

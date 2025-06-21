@@ -1,0 +1,42 @@
+.product-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-card .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.product-card .badge {
+  font-size: 0.8rem;
+  padding: 0.4em 0.8em;
+}
+
+.product-card .specs-preview li {
+  margin-bottom: 0.25rem;
+}
+
+.product-card .btn {
+  transition: all 0.2s ease;
+}
+
+.product-card .btn:hover {
+  transform: translateY(-2px);
+}
+
+.hover-shadow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+} 

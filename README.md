@@ -1,3 +1,4 @@
+<!-- Trigger Vercel Deployment -->
 # PIT_ReactApp (frontend)
 
 This is a full-stack e-commerce application for an online store that sells phones and laptops. The frontend is built with React, and it communicates with a Node.js/Express backend.

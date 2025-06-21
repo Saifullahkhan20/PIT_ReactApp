@@ -65,23 +65,4 @@ console.log('Routes mounted successfully.');
 // Error handler middleware
 app.use(errorHandler);
 
-// Serve React app (THIS MUST BE AFTER API ROUTES)
-app.use(express.static(path.join(__dirname, '../build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-});
-
-const PORT = process.env.PORT || 5000;
-
-console.log(`Starting server on port ${PORT}...`);
-const server = app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-});
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
-  console.log(`Error: ${err.message}`);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-}); 
+module.exports = app; 

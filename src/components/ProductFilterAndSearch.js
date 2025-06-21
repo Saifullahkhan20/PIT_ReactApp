@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { categoriesAPI, brandsAPI } from '../services/api';
 
 function ProductFilterAndSearch({ onApplyFiltersAndSearch, initialCategoryFilter = null }) {
@@ -20,6 +20,7 @@ function ProductFilterAndSearch({ onApplyFiltersAndSearch, initialCategoryFilter
     return initialFilters;
   });
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
+  const [showFilters, setShowFilters] = useState(false);
 
   const fetchCategories = useCallback(async () => {
     try {
@@ -129,108 +130,110 @@ function ProductFilterAndSearch({ onApplyFiltersAndSearch, initialCategoryFilter
       </div>
 
       <div className="row">
-        {/* Filters Sidebar */}
-        <div className="col-md-3">
-          <div className="card mb-4">
-            <div className="card-body">
-              <h5 className="card-title">Filters</h5>
-              <form onSubmit={(e) => { e.preventDefault(); applyFilters(); }}>
-                {/* Category Filters */}
-                <div className="mb-3">
-                  <h6>Categories</h6>
-                  {categories.map(category => (
-                    <div key={category._id} className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id={`category-${category._id}`}
-                        name="category"
-                        value={category._id}
-                        onChange={handleFilterChange}
-                        checked={filters.category.includes(category._id) || (initialCategoryFilter && category.name === initialCategoryFilter)}
-                        disabled={!!initialCategoryFilter && category.name !== initialCategoryFilter} // Disable other categories if initialCategoryFilter is set
-                      />
-                      <label className="form-check-label" htmlFor={`category-${category._id}`}>
-                        {category.name}
-                      </label>
-                    </div>
-                  ))}
-                </div>
+        {/* Filters Sidebar (conditionally rendered) */}
+        {showFilters && (
+          <div className="col-md-3">
+            <div className="card mb-4">
+              <div className="card-body">
+                <h5 className="card-title">Filters</h5>
+                <form onSubmit={(e) => { e.preventDefault(); applyFilters(); }}>
+                  {/* Category Filters */}
+                  <div className="mb-3">
+                    <h6>Categories</h6>
+                    {categories.map(category => (
+                      <div key={category._id} className="form-check">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id={`category-${category._id}`}
+                          name="category"
+                          value={category._id}
+                          onChange={handleFilterChange}
+                          checked={filters.category.includes(category._id) || (initialCategoryFilter && category.name === initialCategoryFilter)}
+                          disabled={!!initialCategoryFilter && category.name !== initialCategoryFilter} // Disable other categories if initialCategoryFilter is set
+                        />
+                        <label className="form-check-label" htmlFor={`category-${category._id}`}>
+                          {category.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Brand Filters */}
-                <div className="mb-3">
-                  <h6>Brands</h6>
-                  {brands.map(brand => (
-                    <div key={brand._id} className="form-check">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id={`brand-${brand._id}`}
-                        name="brand"
-                        value={brand._id}
-                        onChange={handleFilterChange}
-                        checked={filters.brand.includes(brand._id)}
-                      />
-                      <label className="form-check-label" htmlFor={`brand-${brand._id}`}>
-                        {brand.name}
-                      </label>
-                    </div>
-                  ))}
-                </div>
+                  {/* Brand Filters */}
+                  <div className="mb-3">
+                    <h6>Brands</h6>
+                    {brands.map(brand => (
+                      <div key={brand._id} className="form-check">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id={`brand-${brand._id}`}
+                          name="brand"
+                          value={brand._id}
+                          onChange={handleFilterChange}
+                          checked={filters.brand.includes(brand._id)}
+                        />
+                        <label className="form-check-label" htmlFor={`brand-${brand._id}`}>
+                          {brand.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Price Range */}
-                <div className="mb-3">
-                  <h6>Price Range</h6>
-                  <div className="row g-2">
-                    <div className="col">
-                      <input
-                        type="number"
-                        className="form-control"
-                        placeholder="Min"
-                        name="minPrice"
-                        value={filters.minPrice}
-                        onChange={handleFilterChange}
-                      />
-                    </div>
-                    <div className="col">
-                      <input
-                        type="number"
-                        className="form-control"
-                        placeholder="Max"
-                        name="maxPrice"
-                        value={filters.maxPrice}
-                        onChange={handleFilterChange}
-                      />
+                  {/* Price Range */}
+                  <div className="mb-3">
+                    <h6>Price Range</h6>
+                    <div className="row g-2">
+                      <div className="col">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Min"
+                          name="minPrice"
+                          value={filters.minPrice}
+                          onChange={handleFilterChange}
+                        />
+                      </div>
+                      <div className="col">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Max"
+                          name="maxPrice"
+                          value={filters.maxPrice}
+                          onChange={handleFilterChange}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Sort By */}
-                <div className="mb-3">
-                  <h6>Sort By</h6>
-                  <select
-                    className="form-select"
-                    name="sortBy"
-                    value={filters.sortBy}
-                    onChange={handleFilterChange}
-                  >
-                    <option value="newest">Newest</option>
-                    <option value="price_asc">Price: Low to High</option>
-                    <option value="price_desc">Price: High to Low</option>
-                    <option value="name_asc">Name: A to Z</option>
-                    <option value="name_desc">Name: Z to A</option>
-                  </select>
-                </div>
+                  {/* Sort By */}
+                  <div className="mb-3">
+                    <h6>Sort By</h6>
+                    <select
+                      className="form-select"
+                      name="sortBy"
+                      value={filters.sortBy}
+                      onChange={handleFilterChange}
+                    >
+                      <option value="newest">Newest</option>
+                      <option value="price_asc">Price: Low to High</option>
+                      <option value="price_desc">Price: High to Low</option>
+                      <option value="name_asc">Name: A to Z</option>
+                      <option value="name_desc">Name: Z to A</option>
+                    </select>
+                  </div>
 
-                <button type="submit" className="btn btn-primary w-100">Apply Filters</button>
-              </form>
+                  <button type="submit" className="btn btn-primary w-100">Apply Filters</button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* This prop is for the product listing area in the parent component */}
-        <div className="col-md-9">
-          {/* Product listing will appear here. The parent component is responsible for rendering it. */}
+        <div className={showFilters ? "col-md-9" : "col-12"}>
+          {/* Removed: Product listing will appear here. */}
         </div>
       </div>
     </div>

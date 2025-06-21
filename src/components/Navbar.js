@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Nav } from 'react-bootstrap';
+import { Navbar as BootstrapNavbar, Nav, Container } from 'react-bootstrap';
 import { AuthContext, CartContext } from '../App';
-
+import { authAPI } from '../services/api';
 import './Navbar.css';
 import LoadingOverlay from './LoadingOverlay';
 

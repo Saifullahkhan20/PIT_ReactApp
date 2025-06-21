@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { productsAPI } from '../services/api'; // Import productsAPI
 import ProductCard from '../components/ProductCard'; // Import ProductCard
 import ProductFilterAndSearch from '../components/ProductFilterAndSearch'; // Import the new component

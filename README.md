@@ -1,4 +1,3 @@
-<!-- Trigger Vercel Deployment -->
 # PIT_ReactApp (frontend)
 
 This is a full-stack e-commerce application for an online store that sells phones and laptops. The frontend is built with React, and it communicates with a Node.js/Express backend.
@@ -86,4 +85,3 @@ Builds the app for production to the `build` folder.
 *   [Mongoose](https://mongoosejs.com/) - ODM for MongoDB
 *   [React Bootstrap](https://react-bootstrap.github.io/) - UI component library
 *   [Axios](https://axios-http.com/) - Promise-based HTTP client
-  

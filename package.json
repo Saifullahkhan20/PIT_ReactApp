@@ -2,7 +2,6 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "description": "Phone and laptop purchasing application",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
@@ -31,12 +30,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node api/index.js",
-    "build": "CI=false react-scripts build",
+    "start": "set PORT=3000 && react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node api/index.js",
-    "seed": "node api/seeder.js"
+    "server": "node server/server.js",
+    "seed": "node server/seeder.js",
+    "dev": "concurrently \"npm run server\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
@@ -61,4 +61,3 @@
     "nodemon": "^3.0.3"
   }
 }
-// Vercel deployment trigger

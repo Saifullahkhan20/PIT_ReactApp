@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
@@ -9,24 +9,9 @@ import { Alert } from 'react-bootstrap';
 import { CartContext } from '../App';
 
 function ProductCard({ product }) {
-  const specs = product.specs || {};
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const { fetchCartCount } = useContext(CartContext);
   const navigate = useNavigate();
-  const displaySpecs = Object.entries(specs)
-    .filter(([key]) => {
-      if (product.category.name.toLowerCase() === 'phone') {
-        return ['display', 'processor', 'camera', 'battery', 'storage'].includes(key);
-      } else {
-        return ['display', 'processor', 'ram', 'storage', 'graphics'].includes(key);
-      }
-    })
-    .slice(0, 3)
-    .map(([key, value]) => (
-      <li key={key} className="text-muted small">
-        <span className="text-dark">{key}:</span> {value}
-      </li>
-    ));
 
   const renderRating = (rating) => {
     const stars = [];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
 
@@ -12,34 +12,35 @@ const Profile = () => {
             navigate('/signin');
             return;
         }
-        loadUserProfile();
-    }, []);
 
-    const loadUserProfile = async () => {
-        try {
-            const response = await fetch('http://localhost:5001/api/auth/me', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+        const loadUserProfile = async () => {
+            try {
+                const response = await fetch('http://localhost:5001/api/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load profile');
                 }
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to load profile');
-            }
-            
-            const data = await response.json();
-            if (data.success) {
-                setUser(data.data);
-            } else {
+                
+                const data = await response.json();
+                if (data.success) {
+                    setUser(data.data);
+                } else {
+                    localStorage.removeItem('token');
+                    navigate('/signin');
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
                 localStorage.removeItem('token');
                 navigate('/signin');
             }
-        } catch (error) {
-            console.error('Error loading profile:', error);
-            localStorage.removeItem('token');
-            navigate('/signin');
-        }
-    };
+        };
+
+        loadUserProfile();
+    }, [navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
